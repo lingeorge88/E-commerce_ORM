@@ -43,26 +43,24 @@ router.post('/', async(req, res) => {
   // create a new category
 });
 
-router.put('/:id', async(req, res) => {
+router.put('/:id', (req, res) => {
   // update a category by its `id` value
-    const { id } = req.params;
-    const { categoryName } = req.body;
-  
-    try {
-      const category = await Category.findByPk(id);
-  
-      if (!category) {
-        return res.status(404).json({ message: 'Category not found' });
-      }
-  
-      category.categoryName = categoryName;
-      await category.save();
-  
-      res.json({ message: 'Category updated successfully', category });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Server Error' });
+  Category.update(req.body, {
+    where: {
+        id: req.params.id
     }
+})
+    .then(CategoryData => {
+        if (!CategoryData[0]) {
+            res.status(404).json({ message: 'No Category found with this id' });
+            return;
+        }
+        res.json(CategoryData);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 router.delete('/:id', async(req, res) => {
