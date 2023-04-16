@@ -82,7 +82,7 @@
 No testing is currently set up
 
 ## Contributing
-:octocat: [George Lin](https://github.com/lingeorge88)
+:octocat-stormtrooper: [George Lin](https://github.com/lingeorge88)
 
 ## Future Developments
 🏗️🚧
